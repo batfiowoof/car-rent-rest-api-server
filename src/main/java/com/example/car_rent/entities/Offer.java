@@ -18,18 +18,6 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="client_name")
-    private String clientName;
-
-    @Column(name="client_address")
-    private String clientAddress;
-
-    @Column(name="client_phone")
-    private String clientPhone;
-
-    @Column(name="client_age")
-    private int clientAge;
-
     @Column(name="has_accidents")
     private boolean hasAccidents;
 
