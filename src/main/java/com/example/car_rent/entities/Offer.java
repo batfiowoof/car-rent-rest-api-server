@@ -22,7 +22,10 @@ public class Offer {
     private boolean hasAccidents;
 
     @Column(name="car_id")
-    private Long carId; // FK към Car
+    private int carId; // FK към Car
+
+    @Column(name="client_id")
+    private int clientId; // FK към Client
 
     private int days;
     private double price;

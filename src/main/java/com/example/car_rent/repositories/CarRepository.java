@@ -10,12 +10,8 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<Car, Integer> {
 
-    List<Car> findByCity(City city);
+    List<Car> findByLocation(City location);
 
-    Car findById(int id);
-
-    Car updateCar(int id, Car car);
-
-    void deleteById(int id);
+    // find, save методите не са нужни, защото JpaRepository ги има, delete метода също
 
 }
