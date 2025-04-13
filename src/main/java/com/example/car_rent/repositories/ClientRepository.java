@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
-    List<Object> findById(int clientId);
 
     City findLocationById(int clientId);
 }

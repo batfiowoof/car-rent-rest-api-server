@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "cars")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,6 +28,7 @@ public class Car {
     @Column(name = "daily_price")
     private double dailyPrice;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "location")
     private City location;
 

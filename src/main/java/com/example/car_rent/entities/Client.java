@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "client")
+@Table(name = "clients")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,6 +31,7 @@ public class Client {
     @Column(name="age")
     private int age;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="location")
     private City location;
 

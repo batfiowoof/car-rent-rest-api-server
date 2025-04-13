@@ -43,7 +43,7 @@ public class CarController {
     public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car car) {
         try {
             car.setId(id);
-            carService.updateCar(car);
+            this.carService.updateCar(car);
             return ResponseEntity.ok(car);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
@@ -64,5 +64,16 @@ public class CarController {
     public ResponseEntity<List<Car>> getAllCars() {
         List<Car> cars = carService.getAllCars();
         return ResponseEntity.ok(cars);
+    }
+
+    @GetMapping("/{clientId}/location")
+    public ResponseEntity<List<Car>> getCarsByClientLocation(@PathVariable int clientId) {
+        try {
+            List<Car> cars = carService.getCarsByClientLocation(clientId);
+            return ResponseEntity.ok(cars);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -27,9 +28,9 @@ public class CarService {
 
     // Method to get all cars by location
     public List<Car> getCarsByClientLocation(int clientId){
-        Client client = (Client) this.clientRepository.findById(clientId);
+        Optional<Client> client = this.clientRepository.findById(clientId);
 
-        if (client != null) {
+        if (client.isPresent()) {
             return this.carRepository.findByLocation(this.clientRepository.findLocationById(clientId));
         } else {
             throw new IllegalArgumentException("Client not found");

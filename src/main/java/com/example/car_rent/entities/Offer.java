@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "offer")
+@Table(name = "offers")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,6 +16,7 @@ public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name="has_accidents")
@@ -27,8 +28,15 @@ public class Offer {
     @Column(name="client_id")
     private int clientId; // FK към Client
 
+    @Column(name = "days")
     private int days;
+
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "status")
     private String status;
+
+    @Column(name = "deleted")
     private boolean deleted;
 }
