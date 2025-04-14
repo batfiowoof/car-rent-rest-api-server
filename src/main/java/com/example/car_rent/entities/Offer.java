@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "offers")
@@ -28,8 +32,13 @@ public class Offer {
     @Column(name="client_id")
     private int clientId; // FK към Client
 
-    @Column(name = "days")
-    private int days;
+    @Column(name = "start_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     @Column(name = "price")
     private double price;
