@@ -35,4 +35,6 @@ public class Client {
     @Column(name="location")
     private City location;
 
+    @Column(name="deleted")
+    private boolean deleted;
 }

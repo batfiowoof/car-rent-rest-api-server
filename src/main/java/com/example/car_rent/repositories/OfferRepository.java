@@ -18,4 +18,12 @@ public interface OfferRepository extends JpaRepository<Offer, Integer> {
     @Modifying
     @Query("UPDATE Offer o SET o.status = 'accepted' WHERE o.id = :id")
     void acceptOffer(@Param("id") int id);
+
+    @Override
+    @Query("SELECT o FROM Offer o WHERE o.deleted = false")
+    List<Offer> findAll();
+
+    @Modifying
+    @Query("UPDATE Offer o SET o.deleted = true WHERE o.id = :id")
+    void delete(int id);
 }

@@ -44,6 +44,6 @@ public class ClientService {
         if (id <= 0) {
             throw new IllegalArgumentException("Invalid client ID");
         }
-        this.clientRepository.deleteById(id);
+        this.clientRepository.delete(id);
     }
 }

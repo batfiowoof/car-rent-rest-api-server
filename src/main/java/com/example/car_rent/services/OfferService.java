@@ -47,7 +47,7 @@ public class OfferService {
     }
 
     public void deleteOffer(int id) {
-        this.offerRepository.deleteById(id);
+        this.offerRepository.delete(id);
     }
 
     public void acceptOffer(int id) {

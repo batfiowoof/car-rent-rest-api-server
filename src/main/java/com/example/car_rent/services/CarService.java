@@ -53,7 +53,7 @@ public class CarService {
     }
 
     public void deleteCar(int id) {
-        this.carRepository.deleteById(id);
+        this.carRepository.delete(id);
     }
 
     public void updateCar(Car car) {
