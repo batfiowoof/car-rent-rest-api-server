@@ -21,52 +21,32 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<Client>> getAllClients() {
-        try {
-            List<Client> clients = clientService.getAllClients();
-            return ResponseEntity.ok(clients);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client ID");
-        }
+        List<Client> clients = clientService.getAllClients();
+        return ResponseEntity.ok(clients);
     }
 
-    @GetMapping("/client/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable int id) {
-        try {
-            Client client = clientService.getClientById(id);
-            return ResponseEntity.ok(client);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client ID");
-        }
+        Client client = clientService.getClientById(id);
+        return ResponseEntity.ok(client);
     }
 
     @PostMapping
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
-        try {
-            clientService.createClient(client);
-            return ResponseEntity.ok(client);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client data");
-        }
+        clientService.createClient(client);
+        return ResponseEntity.ok(client);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable int id, @RequestBody Client client) {
-        try {
-            client.setId(id);
-            this.clientService.updateClient(client);
-            return ResponseEntity.ok(client);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client data");
-        }
+        client.setId(id);
+        clientService.updateClient(client);
+        return ResponseEntity.ok(client);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable int id) {
-        try {
-            clientService.deleteClient(id);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client ID");
-        }
+        clientService.deleteClient(id);
+        return ResponseEntity.ok().build();
     }
 }

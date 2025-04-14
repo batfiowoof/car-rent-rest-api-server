@@ -21,51 +21,31 @@ public class OfferController {
 
     @PostMapping
     public ResponseEntity<Offer> createOffer(@RequestBody Offer offer) {
-        try {
-            this.offerService.createOffer(offer);
-            return ResponseEntity.ok(offer);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid offer");
-        }
+        offerService.createOffer(offer);
+        return ResponseEntity.ok(offer);
     }
 
-    @GetMapping("/{clientId}")
+    @GetMapping("/client/{clientId}")
     public ResponseEntity<List<Offer>> getAllOffersByClientId(@PathVariable int clientId) {
-        try {
-            List<Offer> offers = this.offerService.getAllOffersByClientId(clientId);
-            return ResponseEntity.ok(offers);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid client ID");
-        }
+        List<Offer> offers = offerService.getAllOffersByClientId(clientId);
+        return ResponseEntity.ok(offers);
     }
 
-    @GetMapping("/offer/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Offer> getOfferById(@PathVariable int id) {
-        try {
-            Offer offer = this.offerService.getOfferById(id);
-            return ResponseEntity.ok(offer);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid offer ID");
-        }
+        Offer offer = offerService.getOfferById(id);
+        return ResponseEntity.ok(offer);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOffer(@PathVariable int id) {
-        try {
-            this.offerService.deleteOffer(id);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid offer ID");
-        }
+        offerService.deleteOffer(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/accept/{id}")
     public ResponseEntity<Void> acceptOffer(@PathVariable int id) {
-        try {
-            this.offerService.acceptOffer(id);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid offer ID");
-        }
+        offerService.acceptOffer(id);
+        return ResponseEntity.ok().build();
     }
 }

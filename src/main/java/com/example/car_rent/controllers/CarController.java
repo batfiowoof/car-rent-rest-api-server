@@ -21,59 +21,38 @@ public class CarController {
 
     @PostMapping
     public ResponseEntity<Car> addCar(@RequestBody Car car) {
-        try {
-            carService.createCar(car);
-            return ResponseEntity.ok(car);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+        carService.createCar(car);
+        return ResponseEntity.ok(car);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable int id) {
-        try {
-            carService.deleteCar(id);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        carService.deleteCar(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car car) {
-        try {
-            car.setId(id);
-            this.carService.updateCar(car);
-            return ResponseEntity.ok(car);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+        car.setId(id);
+        carService.updateCar(car);
+        return ResponseEntity.ok(car);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable int id) {
-        try {
-            Car car = carService.getCarById(id);
-            return ResponseEntity.ok(car);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+        Car car = carService.getCarById(id);
+        return ResponseEntity.ok(car);
     }
 
     @GetMapping
     public ResponseEntity<List<Car>> getAllCars() {
-        List<Car> cars = carService.getAllCars();
-        return ResponseEntity.ok(cars);
+        return ResponseEntity.ok(carService.getAllCars());
     }
 
     @GetMapping("/{clientId}/location")
     public ResponseEntity<List<Car>> getCarsByClientLocation(@PathVariable int clientId) {
-        try {
-            List<Car> cars = carService.getCarsByClientLocation(clientId);
-            return ResponseEntity.ok(cars);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
+        return ResponseEntity.ok(carService.getCarsByClientLocation(clientId));
     }
+
 }
+

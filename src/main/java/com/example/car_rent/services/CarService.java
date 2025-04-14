@@ -2,7 +2,9 @@ package com.example.car_rent.services;
 
 import com.example.car_rent.entities.Car;
 import com.example.car_rent.entities.Client;
+import com.example.car_rent.enums.CarErrorType;
 import com.example.car_rent.enums.City;
+import com.example.car_rent.exceptions.CarException;
 import com.example.car_rent.repositories.CarRepository;
 import com.example.car_rent.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,12 @@ public class CarService {
 
         if (client.isPresent()) {
             return this.carRepository.findByLocation(this.clientRepository.findLocationById(clientId));
-        } else {
-            throw new IllegalArgumentException("Client not found");
         }
+            throw new IllegalArgumentException("Client not found");
     }
 
     public Car getCarById(int id) {
-        return this.carRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+        return this.carRepository.findById(id).orElseThrow(() -> new CarException(CarErrorType.NOT_FOUND));
     }
 
     public List<Car> getAllCars() {
@@ -46,8 +47,8 @@ public class CarService {
     }
 
     public void createCar(Car car) {
-        if(!validateCity(car)) {
-            throw new IllegalArgumentException("Invalid city");
+        if (this.carRepository.existsById(car.getId())) {
+            throw new CarException(CarErrorType.DUPLICATE_CAR);
         }
         this.carRepository.save(car);
     }
@@ -58,7 +59,7 @@ public class CarService {
 
     public void updateCar(Car car) {
         if(!validateCity(car)) {
-            throw new IllegalArgumentException("Invalid city");
+            throw new CarException(CarErrorType.INVALID_CITY);
         }
         this.carRepository.save(car);
     }
