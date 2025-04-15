@@ -23,7 +23,8 @@ CREATE TABLE clients (
                          address VARCHAR(255),
                          phone VARCHAR(20),
                          age INTEGER,
-                         location VARCHAR(20) CHECK (location IN ('SOFIA', 'PLOVDIV', 'VARNA', 'BURGAS', 'OTHER'))
+                         location VARCHAR(20) CHECK (location IN ('SOFIA', 'PLOVDIV', 'VARNA', 'BURGAS', 'OTHER')),
+                        deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 

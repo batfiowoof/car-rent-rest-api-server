@@ -26,11 +26,13 @@ public class Offer {
     @Column(name="has_accidents")
     private boolean hasAccidents;
 
-    @Column(name="car_id")
-    private int carId; // FK към Car
+    @ManyToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
+    private Car car; // FK към Car
 
-    @Column(name="client_id")
-    private int clientId; // FK към Client
+    @ManyToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client; // FK към Client
 
     @Column(name = "start_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

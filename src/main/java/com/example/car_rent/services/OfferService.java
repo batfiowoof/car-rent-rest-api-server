@@ -1,7 +1,12 @@
 package com.example.car_rent.services;
 
+import com.example.car_rent.dto.OfferDTO;
 import com.example.car_rent.entities.Car;
 import com.example.car_rent.entities.Offer;
+import com.example.car_rent.enums.CarErrorType;
+import com.example.car_rent.enums.OfferErrorType;
+import com.example.car_rent.exceptions.CarException;
+import com.example.car_rent.exceptions.OfferException;
 import com.example.car_rent.repositories.CarRepository;
 import com.example.car_rent.repositories.ClientRepository;
 import com.example.car_rent.repositories.OfferRepository;
@@ -10,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,7 +34,7 @@ public class OfferService {
 
     public void createOffer(Offer offer) {
         if (!validateOffer(offer)) {
-            throw new IllegalArgumentException("Invalid offer");
+            throw new OfferException(OfferErrorType.INVALID_DATA);
         }
         double price = calculatePrice(offer);
         offer.setPrice(price);
@@ -42,9 +45,10 @@ public class OfferService {
          return this.offerRepository.findAllByClientId(clientId);
     }
 
-    public Offer getOfferById(int id) {
-        return this.offerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Offer not found"));
-    }
+    //replaced by dto
+//    public Offer getOfferById(int id) {
+//        return this.offerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Offer not found"));
+//    }
 
     public void deleteOffer(int id) {
         this.offerRepository.delete(id);
@@ -55,12 +59,13 @@ public class OfferService {
     }
 
     private boolean validateOffer(Offer offer) {
-        return this.clientRepository.existsById(offer.getClientId()) && this.carRepository.existsById(offer.getCarId());
+        return this.clientRepository.existsById(offer.getClient().getId()) && this.carRepository.existsById(offer.getCar().getId());
     }
+
 
     //if contains weekend, then 10% more for the weekdays
     private double calculatePrice(Offer offer) {
-        Car car = this.carRepository.findById(offer.getCarId()).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+        Car car = this.carRepository.findById(offer.getCar().getId()).orElseThrow(() -> new CarException(CarErrorType.NOT_FOUND));
 
         double basePrice = car.getDailyPrice();
         double totalPrice = 0;
@@ -69,7 +74,7 @@ public class OfferService {
         LocalDate endDate = offer.getEndDate();
 
         if (endDate.isBefore(startDate)) {
-            throw new IllegalArgumentException("End date cannot be before start date");
+            throw new OfferException(OfferErrorType.INVALID_DATE);
         }
 
         LocalDate currentDate = startDate;
@@ -88,5 +93,21 @@ public class OfferService {
         }
 
         return totalPrice;
+    }
+
+    public OfferDTO getOfferDTOById(int id) {
+        Offer offer = this.offerRepository.findById(id).orElseThrow(() -> new OfferException(OfferErrorType.NOT_FOUND));
+
+        double totalPrice = calculatePrice(offer);
+        return OfferDTO.builder()
+                .id(offer.getId())
+                .clientName(offer.getClient().getName())
+                .carBrand(offer.getCar().getBrand())
+                .carModel(offer.getCar().getModel())
+                .dailyPrice(offer.getCar().getDailyPrice())
+                .location(offer.getCar().getLocation().toString())
+                .days((int) ChronoUnit.DAYS.between(offer.getStartDate(), offer.getEndDate()))
+                .totalPrice(totalPrice)
+                .build();
     }
 }

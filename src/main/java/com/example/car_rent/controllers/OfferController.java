@@ -1,5 +1,6 @@
 package com.example.car_rent.controllers;
 
+import com.example.car_rent.dto.OfferDTO;
 import com.example.car_rent.entities.Offer;
 import com.example.car_rent.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Offer> getOfferById(@PathVariable int id) {
-        Offer offer = offerService.getOfferById(id);
+    public ResponseEntity<OfferDTO> getOfferById(@PathVariable int id) {
+        OfferDTO offer = offerService.getOfferDTOById(id);
         return ResponseEntity.ok(offer);
     }
 

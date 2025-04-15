@@ -2,6 +2,7 @@ package com.example.car_rent.exceptions;
 
 import com.example.car_rent.enums.CarErrorType;
 import com.example.car_rent.enums.ClientErrorType;
+import com.example.car_rent.enums.OfferErrorType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -45,7 +46,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-
     @ExceptionHandler(ClientException.class)
     public ResponseEntity<ErrorResponse> handleClientException(ClientException ex) {
         ClientErrorType type = ex.getErrorType();
@@ -58,4 +58,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.valueOf(type.getStatus()));
     }
 
+    @ExceptionHandler(OfferException.class)
+    public ResponseEntity<ErrorResponse> handleOfferException(OfferException ex) {
+        OfferErrorType type = ex.getErrorType();
+
+        ErrorResponse error = new ErrorResponse(
+                type.getMessage(),
+                type.getStatus()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.valueOf(type.getStatus()));
+    }
 }
