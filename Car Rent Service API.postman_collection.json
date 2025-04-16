@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "4fe2ea8e-89b7-4c93-8f54-2a1e707ce271",
+		"name": "Car Rent Service API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32614195"
+	},
+	"item": [
+		{
+			"name": "Get All Cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cars",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"brand\": \"Toyota\",\r\n  \"model\": \"Corolla\",\r\n  \"dailyPrice\": 65.00,\r\n  \"location\": \"SOFIA\",\r\n  \"deleted\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cars",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Clients",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clients",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Client",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Иван Петров\",\r\n  \"address\": \"ул. Шипка 25, София\",\r\n  \"phone\": \"+359888123456\",\r\n  \"age\": 32,\r\n  \"location\": \"SOFIA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clients",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Offer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/offers/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"offers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Offer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"clientId\": 1,\r\n  \"carId\": 1,\r\n  \"startDate\": \"2025-04-18\",\r\n  \"endDate\": \"2025-04-21\",\r\n  \"status\": \"not accepted\",\r\n  \"hadIncident\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/offers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"offers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
