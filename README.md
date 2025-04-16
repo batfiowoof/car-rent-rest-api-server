@@ -78,7 +78,7 @@ src/
     git clone https://github.com/batfiowoof/car-rent-rest-api-server
     ```
 
-2. Стартирай приложението:
+2. Стартирайте приложението:
     - Чрез IDE (например IntelliJ) – стартирай `CarRentApplication`
     - Или с Maven:
       ```bash
@@ -92,3 +92,5 @@ src/
 ## ☁️ Deploy
 
 `https://car-rent-rest-api-server.onrender.com/`
+
+За най-лесно тестване нагласете https://car-rent-rest-api-server.onrender.com/ като environment в Postman и използвайте предоставената колекция от Postman заявки за тест.
