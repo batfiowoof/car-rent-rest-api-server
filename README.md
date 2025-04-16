@@ -87,3 +87,8 @@ src/
 
 3. Достъп до H2 конзолата:
     - `http://localhost:8080/h2-console`
+  
+
+## ☁️ Deploy
+
+`https://car-rent-rest-api-server.onrender.com/`
